@@ -54,8 +54,26 @@ QMReg = SQReg
 QMRes = (SQRes)/(n-2); 
 sigma2 = QMRes 
 
-
 VB1 = sigma2/sxx; VB1
+
+sd(VB1)
+
+
+ndB0 = 2* min(pt(7.970, n-2), pt(7.970, n-2, low = F)); ndB0
+
+ndB1 = 2* min(pt(-3.597, n-2), pt(-3.547, n-2, low = F)); ndB1
+
+T0B0 = m$coef[1]/sqst(QMRes* ((1/n)+(mx^2/sxx))); T0B0
+
+R2 = SQReg/SQT; R2
+
+sqres = 1 - sum((d-m$fit)^2); sqres
+SQRes
+
+sqreg = sum((m$fit - my)^2); sqreg
+SQReg
+
+
 
 
 sd(VB1)
