@@ -1,1 +1,63 @@
+p = c(1.2, 1.3, 1.4, 1.6, 1.6, 1.8, 1.9, 1.9, 2.2, 2.2, 2.6)
+d = c(16, 12, 12, 14, 10, 14, 12, 9.9, 10, 7, 7.5)
+
+plot(p, d, pch = 19)
+
+### Modelo ###
+m = lm(d~p); m
+names(m)
+m$coe[1]
+m$coe[2]
+
+ma = function(p){
+  as.numeric(m$coe[1] + m$coe[2]*p)
+}
+
+ma(p)
+
+### Reta Ajustada ###
+abline(m, col = "blue", lwd = 2)
+
+points(p, ma(p), col = "red")
+
+
+### Coeficientes \hat(\beta_0) e \hat(\beta_1) ###
+
+
+sx = sum(p)
+sy = sum(d)
+sxy = sum(p*d)
+mx = mean(p)
+my = mean(d)
+sx2 = sum(p^2)
+sy2 = sum(d^2)
+sxx = sum((p-mx)^2)
+syy = sum((d-my)^2)
+sx.y = sum((p-mx)*(d-my))
+
+n = 11
+
+B1 = (sxy-n*mx*my)/(sx2-n*(mx)^2); B1
+B1test = sx.y/sxx; B1test
+
+B0 = my - (B1*mx); B0
+
+summary(m)
+
+QMRes = sum((d~m$fit)^2)/(lenght(d)-2); QMRes
+
+SQReg = B1 * sxy - ((sx*sy)/n); SQReg
+
+SQT = sy2 - ((sy)^2)/n; SQT
+SQRes = SQT - SQReg; SQT
+QMReg = SQReg
+QMRes = (SQRes)/(n-2); 
+sigma2 = QMRes 
+
+
+VB1 = sigma2/sxx; VB1
+
+
+sd(VB1)
+
 
