@@ -33,49 +33,73 @@ sx2 = sum(p^2)
 sy2 = sum(d^2)
 sxx = sum((p-mx)^2)
 syy = sum((d-my)^2)
-sx.y = sum((p-mx)*(d-my))
+sx.y = sum((p-mx)*(d-my)); sx.y
 
-n = 11
+### Calculos na Mão ###
 
-B1 = (sxy-n*mx*my)/(sx2-n*(mx)^2); B1
-B1test = sx.y/sxx; B1test
+n = length(d); n
+
+B1 = sx.y/sxx; B1
 
 B0 = my - (B1*mx); B0
 
 summary(m)
 
-QMRes = sum((d~m$fit)^2)/(lenght(d)-2); QMRes
+QMRes = sum((d-m$fit)^2)/(length(d)-2); QMRes
 
-SQReg = B1 * sxy - ((sx*sy)/n); SQReg
+sigmaB0 = sqrt(QMRes*(1/length(d)+(mx^2)/sxx)); sigmaB0
+sigmaB1 = sqrt(QMRes/sxx); sigmaB1
 
-SQT = sy2 - ((sy)^2)/n; SQT
-SQRes = SQT - SQReg; SQT
-QMReg = SQReg
-QMRes = (SQRes)/(n-2); 
-sigma2 = QMRes 
+### Teste de Hipótese ###
 
-VB1 = sigma2/sxx; VB1
+t0B0 = m$coe[1]/sqrt(QMRes*((1/n) + (mx^2/sxx))); t0B0 
+t0B1 = m$coe[2]/sqrt(QMRes/sxx); t0B1
 
-sd(VB1)
+### Variância ou Sigma^2 Estimado ###
 
+sigma2est = QMRes
+sigmaest = sqrt(QMRes)
 
-ndB0 = 2* min(pt(7.970, n-2), pt(7.970, n-2, low = F)); ndB0
+### Continuando ###
 
-ndB1 = 2* min(pt(-3.597, n-2), pt(-3.547, n-2, low = F)); ndB1
+SQReg = B1 * sx.y; SQReg 
+SQRes = sum((d-m$fit)^2); SQRes
+SQT = syy; SQT
 
-T0B0 = m$coef[1]/sqst(QMRes* ((1/n)+(mx^2/sxx))); T0B0
+F0 = SQReg/(SQRes/(n-2)); F0
 
 R2 = SQReg/SQT; R2
+R2ajust = R2 - (1 - R2)/(n-2); R2ajust 
 
-sqres = 1 - sum((d-m$fit)^2); sqres
-SQRes
+QMReg = SQReg/1
 
-sqreg = sum((m$fit - my)^2); sqreg
-SQReg
+### IMPORTANTE PARA O TRABALHO 1 ###
+
+plot(m)
+
+# Resíduo vs ajustado (variância constante), (e linearidade)
+# Checa normalidade QQ- normalmente distribuídos
+# Homocedasticidade - para variância
+# Outliers
+
+# Se é liear 1
+# Testar para Checar normalidade
+
+### Nível Descritivo ###
+
+ndB0 = 2* min(pt(7.970, n-2), pt(7.970, n-2, low = F)); ndB0
+ndB1 = 2* min(pt(-3.597, n-2), pt(-3.547, n-2, low = F)); ndB1
+
+### Desvio Padrão Intercepto ###
+
+dpB0 = sqrt(QMRes * (mx^2/sxx)); dpB0
+
+### Estimativas Intervalares ###
+confint(m)
+
+anova(m)
 
 
 
-
-sd(VB1)
 
 
