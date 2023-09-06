@@ -1,0 +1,30 @@
+### Aula 06/09/23 ###
+
+t = c(21, 24, 32, 47, 50, 59, 68, 74, 62, 50, 41, 30)
+c = c(185.79, 214.47, 288.03, 424.84, 454.58, 539.03, 621.55, 675.06, 562.03, 452.93, 369.95, 273.98)
+
+# y = consumo e x = temperatura
+
+sx = sum(t); sx
+sy = sum(c); sy
+sxy = sum(t*c); sxy
+sx2 = sum(t^2); sx2
+sy2 = sum(c^2); sy2
+
+# Ajustas o modelo #
+m = lm(c~t); m
+
+ajustdo = function(m){
+  as.numeric(m$coef[1]+m$coef[2]*t)
+}
+
+ajustdo(m)
+
+### Resolvendo Lista 2 ###
+ 
+itemb = function(x){
+  m$coef[1] + m$coef[2]*x
+}
+
+itemb(55)
+
