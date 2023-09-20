@@ -30,8 +30,11 @@ IC_mi = predict(m, interval = "confidence"); IC_mi
 
 IP_y = predict(m, interval = "predict"); IP_y
 
-
+# se eu quiser com x=85, vejo a linha do 85 
+# limite inferior = lwr e limite superior = upr
 cbind(x, predict(m, interval = "confidence"))
+
+
 
 
 
