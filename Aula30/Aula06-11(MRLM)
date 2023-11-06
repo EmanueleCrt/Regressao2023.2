@@ -76,9 +76,9 @@ anova(m12)
 m1 = lm(y~x1)
 m2 = lm(y~x2)
 anova(m1); anova(m2)
-X = model.matrix(m12)
-mx = lm(y~X[,-1])
-anova(mx)
+xzao = model.matrix(m12)
+mxzao = lm(y~xzao[,-1])
+anova(mxzao)
 
 
 
