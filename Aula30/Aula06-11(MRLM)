@@ -89,6 +89,15 @@ plot3d(x1, x2, y, pch = 19, size = 10, col = "red", xlim = c(0, 10), ylim = c(0,
 
 planes3d(4, -11, -1, 34, alpha = 0.5)
 
+anova(m12)
+
+# SQreg
+
+J = matrix(1, length(y), length(y)); J #J é Jn
+
+SQreg = t(y) %*% (H - J/n) %*% y ; SQreg
+
+
 
 
 
