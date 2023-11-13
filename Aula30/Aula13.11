@@ -1,0 +1,50 @@
+
+dados = data.frame(Exerc11.6)
+dados
+
+y = dados$y
+x1 = dados$X1
+x2 = dados$X2
+x3 = dados$X3
+x4 = dados$X4
+
+# Coeficientes e Anova para x1
+
+m1 =lm(y~x1); m1
+anova(m1)
+
+
+# Coeficientes e Anova para x2
+
+m2 =lm(y~x2); m2
+anova(m2)
+
+
+# Coeficientes e Anova para x3
+
+m3 =lm(y~x3); m3
+anova(m3)
+
+
+# Coeficientes e Anova para x1 e x2
+
+m12 =lm(y~x1+x2); m12
+anova(m12)
+
+# Coeficientes e Anova para x1, x2 e x3
+
+m123 =lm(y~x1+x2+x3); m123
+anova(m123)
+
+# Testar a significancia de x3 na presença de x1 e x2
+
+x123 = model.matrix(m123); x123
+m123x = lm(y~x123);m123x
+anova(m123x)
+
+x12 = model.matrix(m12)
+m12x = lm(y~x12); m12x
+anova(m12x)
+
+summary(m123)
+
