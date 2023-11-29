@@ -44,3 +44,12 @@ R2 = resumo$r.squared; R2
 
 sigB0 = m12x$coe[1]/resumo$coe[1,3]; sigB0
 
+# Soma dos quadrados e p-valor
+a12x = anova(m12x); a12x
+am = anova(m); am
+SQextra = a12x[1,2] - am[1,2]; SQextra
+
+F0 = SQextra/a12x[2,3]; F0
+
+p.valor = pf(F0, 1, 16, low = F); p.valor
+
