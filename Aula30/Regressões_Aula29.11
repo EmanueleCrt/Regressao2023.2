@@ -1,0 +1,46 @@
+
+x = c(1, 1.5, 2, 3, 4, 4.5, 5, 5.5, 6, 6.5, 7:15)
+y = c(63, 111, 200, 240, 261, 300, 338, 340, 381, 399, 420, 461, 531, 520, 525,
+      480, 428, 278, 219)/10
+
+# Centralizando x
+xcent = x - mean(x); xcent
+
+plot(xcent, y)
+
+m = lm(y~xcent)
+
+abline(m, col = "red")
+
+anova(m)
+summary(m)
+
+# Não parece adequado. Tudo torto!
+
+
+polin = lm(y~xcent+I(xcent^2))
+polin
+anova(polin)
+
+# Curva função de disperção estimada
+res = function(xcent){
+  polin$coef[1]+polin$coef[2]*xcent+polin$coef[3]*xcent^2
+}
+
+curve(res, add = TRUE)
+
+# Anova com valores somados
+
+x12 = model.matrix(polin)[,-1]
+m12x = lm(y~x12); m12x
+anova(m12x)
+
+# Coeficiente de determinação
+
+resumo = summary(m12x)
+R2 = resumo$r.squared; R2
+
+# Erro padrão (B0/t_value)
+
+sigB0 = m12x$coe[1]/resumo$coe[1,3]; sigB0
+
