@@ -1,0 +1,32 @@
+
+### Aula 27/11 ####
+
+# 1. AJustar modelo
+# 2. Polinomial de grau 4
+
+y = c(165, 140, 60, 100, 35)/10
+x = c(10, 35, 40, 75, 90)/10
+
+# Ajustado
+m = lm(y~x); anova(m)
+
+plot(x, y)
+abline(m, col = "red")
+lines(x, y, col = "blue")
+
+par(mfrow = c(2, 2))
+plot(m)
+summary(m)
+
+shapiro.test(m$residuals)
+
+
+
+# Ajustado de forma polinomial
+poli = lm(y~x+I(x^2)+I(x^3)+I(x^4))
+poli
+anova(poli)
+# Modelo perfeito, não serve para análise
+
+plot(poli)
+plot(poil)
